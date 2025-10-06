@@ -1,0 +1,136 @@
+/* --- Styles de Base (Thème Sombre Uniforme) --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a; /* Fond très sombre */
+    color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* --- Conteneur Principal (Grid) --- */
+.ecran-principal {
+    display: grid;
+    /* 5 colonnes : 0.2fr (espace) | 1fr (Widget 1) | 2fr (Centre) | 1fr (Widget 2) | 0.2fr (espace) */
+    grid-template-columns: 0.2fr 1.5fr 3fr 1.5fr 0.2fr;
+    /* 4 rangées : 0.2fr (espace) | 2fr (Haut) | 1fr (Bas) | 0.2fr (espace) */
+    grid-template-rows: 0.2fr 2fr 1fr 0.2fr; 
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* --- Styles des Widgets (Thème Vif) --- */
+.widget {
+    border: 3px solid #00ccff; /* Contour bleu vif */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Important pour les iframes */
+}
+.widget p {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #4CAF50; /* Vert pour les titres de widgets */
+}
+.widget span {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffcc00; /* Jaune pour les données clés */
+}
+
+/* --- Positionnement des Éléments --- */
+
+/* Météo + Sport */
+.meteo {
+    grid-column: 2 / 3; 
+    grid-row: 2 / 3; 
+}
+.transports {
+    grid-column: 4 / 5; 
+    grid-row: 2 / 3; 
+}
+.scores {
+    grid-column: 2 / 3; 
+    grid-row: 3 / 4; 
+}
+.ap-pdf {
+    grid-column: 4 / 5; 
+    grid-row: 3 / 4; 
+}
+
+/* Heure et Date (Grand centre) */
+.centre-heure-date {
+    grid-column: 3 / 4; 
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
+}
+#heure-actuelle {
+    font-size: 8em;
+    margin: 0;
+    line-height: 1em;
+    color: #00ccff; /* Bleu */
+}
+#date-actuelle {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+/* Événement de Dernière Minute (Bandeau en bas) */
+.evenement-bas {
+    grid-column: 2 / 5; 
+    grid-row: 4 / 5; 
+    background-color: #4CAF50; /* Vert pour l'accentuation */
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.evenement-bas p {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+/* Style de l'affichage PDF */
+.pdf-container {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pdf-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+}
+.pdf-container p {
+    font-size: 0.9em;
+    font-weight: normal;
+    color: #aaa;
+}

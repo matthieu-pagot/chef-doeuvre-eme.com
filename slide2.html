@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 2 - Annonces et Informations</title>
+    <link rel="stylesheet" href="slide2.css"> 
+</head>
+<body>
+    <div id="slide2" class="ecran-principal">
+        
+        <div class="widget annonce-lycee">
+            <p class="titre">📢 Annonces du Lycée</p>
+            <div id="annonces-contenu"> 
+                <p>Annonces (Porte ouverte, voyages...)</p>
+            </div>
+        </div>
+
+        <div class="widget menu-cantine">
+            <p class="titre">🍽️ Menu de la Cantine</p>
+            <div id="menu-contenu" class="pdf-container">
+                <p>Zone d'affichage du Menu (PDF ou Image)</p>
+            </div>
+        </div>
+
+        <div class="widget calendrier-scolaire">
+            <p class="titre">📅 Calendrier scolaire</p>
+            <div id="calendrier-contenu" class="pdf-container">
+                <p>Zone d'affichage du Calendrier</p>
+            </div>
+        </div>
+        
+        <div class="widget info-semaine">
+            <p class="titre">ℹ️ Info de la semaine</p>
+            <div id="info-semaine-contenu">
+                 <p>Journal un peu comme HugoDécrypte</p>
+            </div>
+        </div>
+
+        <div class="widget heure-date">
+            <p class="titre" style="margin-bottom: 0;">Heure & Date</p>
+            <h3 id="heure-actuelle">Heure</h3>
+            <p id="date-actuelle">Date</p>
+        </div>
+
+    </div>
+
+    <script>
+        function mettreAJourHeureEtDate() {
+            const maintenant = new Date();
+            const optionsHeure = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const optionsDate = { weekday: 'short', month: 'short', day: 'numeric' };
+
+            document.getElementById('heure-actuelle').textContent = maintenant.toLocaleTimeString('fr-FR', optionsHeure);
+            document.getElementById('date-actuelle').textContent = maintenant.toLocaleDateString('fr-FR', optionsDate);
+        }
+
+        mettreAJourHeureEtDate();
+        setInterval(mettreAJourHeureEtDate, 1000);
+    </script>
+    
+    <script>
+        const DATA_KEY_PREFIX = 'slideData-';
+
+        function chargerContenuDynamique() {
+            const slideId = document.getElementById('slide2').id + '-content';
+            const dataKey = DATA_KEY_PREFIX + slideId;
+            const data = JSON.parse(localStorage.getItem(dataKey));
+
+            if (!data) return;
+
+            // Annonces (Info de la semaine est inclus ici)
+            document.getElementById('annonces-contenu').innerHTML = (data['annonces-texte'] || 'Pas d\'annonces actuellement.').replace(/\n/g, '<br>');
+            
+            // Menu PDF
+            const menuContainer = document.getElementById('menu-contenu');
+            if (menuContainer) {
+                menuContainer.innerHTML = data['menu-pdf-url']
+                    ? `<iframe src="${data['menu-pdf-url']}" type="application/pdf"></iframe>`
+                    : '<p>Menu de la cantine non disponible.</p>';
+            }
+            // Calendrier PDF
+            const calendrierContainer = document.getElementById('calendrier-contenu');
+            if (calendrierContainer) {
+                calendrierContainer.innerHTML = data['calendrier-pdf-url']
+                    ? `<iframe src="${data['calendrier-pdf-url']}" type="application/pdf"></iframe>`
+                    : '<p>Calendrier scolaire non disponible.</p>';
+            }
+        }
+        
+        chargerContenuDynamique();
+    </script>
+</body>
+</html>

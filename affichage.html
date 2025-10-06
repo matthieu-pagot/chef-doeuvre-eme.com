@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Écran d'Information Dynamique - Défilement</title>
+    <link rel="stylesheet" href="affichage.css">
+</head>
+<body>
+
+    <iframe id="slide-frame" src=""></iframe>
+    
+    <div id="progress-container">
+        <div id="progress-ring"></div>
+    </div>
+
+    <script>
+        // --- Configuration du Défilement (Vos temps demandés) ---
+        const slides = [
+            // Slide 1 : 20 secondes
+            { url: 'Slide 1/slide1.html', duration: 20000 }, 
+            // Slide 2 : 10 secondes
+            { url: 'Slide 2/slide2.html', duration: 10000 }, 
+            // Slide 3 : 10 secondes
+            { url: 'Slide 3/slide3.html', duration: 10000 }  
+        ];
+
+        let currentSlideIndex = -1;
+        const iframe = document.getElementById('slide-frame');
+        const progressContainer = document.getElementById('progress-container');
+        const progressRing = document.getElementById('progress-ring');
+        let animationFrameId; // Pour gérer l'animation du cercle
+        let timeoutId;        // Pour gérer le timer du changement de slide
+
+        /**
+         * Anime le cercle de progression pendant la durée de la slide.
+         * @param {number} duration La durée totale de l'animation en ms.
+         */
+        function animateProgress(duration) {
+            let startTime;
+            
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                
+                const elapsedTime = timestamp - startTime;
+                const percentage = Math.min(1, elapsedTime / duration);
+                // Calcul de l'angle (360 * (1 - pourcentage écoulé))
+                const degrees = 360 * (1 - percentage); 
+                
+                // Met à jour le gradient conique pour simuler la progression
+                progressRing.style.background = `conic-gradient(transparent ${degrees}deg, #4CAF50 ${degrees}deg)`; /* Utilisation du vert pour la progression */
+
+                if (percentage < 1) {
+                    animationFrameId = requestAnimationFrame(step);
+                } else {
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }
+            
+            // Réinitialise et lance l'animation
+            cancelAnimationFrame(animationFrameId); 
+            progressContainer.style.opacity = '1'; 
+            animationFrameId = requestAnimationFrame(step);
+        }
+
+        /**
+         * Affiche la prochaine slide et planifie le passage suivant.
+         */
+        function showNextSlide() {
+            // Annule le timer précédent (pour une boucle propre)
+            clearTimeout(timeoutId);
+            
+            // 1. Passage à l'index suivant (0, 1, 2, 0, 1, 2...)
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            const slide = slides[currentSlideIndex];
+
+            // 2. Transition de fondu et changement de source
+            iframe.style.opacity = '0'; // Fondu sortant
+
+            // Laisse le temps pour le fondu (500ms) avant de changer la source et de fondre en retour
+            setTimeout(() => {
+                iframe.src = slide.url;
+                iframe.style.opacity = '1'; // Fondu entrant
+            }, 500); 
+
+            // 3. Lance l'animation du cercle
+            animateProgress(slide.duration);
+            
+            // 4. Planification du prochain appel
+            timeoutId = setTimeout(() => {
+                progressContainer.style.opacity = '0'; // Masque l'indicateur avant le changement
+                showNextSlide();
+            }, slide.duration);
+        }
+
+        // --- Démarrage de la séquence ---
+        showNextSlide(); // Démarre immédiatement sur Slide 1 (index 0)
+
+    </script>
+</body>
+</html>

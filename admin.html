@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Écran Dynamique</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div id="login-page" class="page active">
+        <div class="login-box">
+            <h2>Connexion Administrateur</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Nom d'utilisateur :</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" id="login-button">Se connecter</button>
+                <p id="login-message" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-interface" class="page hidden">
+        
+        <header>
+            <h1 id="header-title">Tableau de Bord - Gestion des Slides</h1>
+            <button id="logout-button" class="hidden">Se déconnecter</button>
+        </header>
+
+        <main>
+            <div id="slide-choice-container-wrapper" class="hidden">
+                <h2>Sélectionnez la page à modifier :</h2>
+                <div class="slide-choice-container">
+                    <button class="slide-choice-button" id="choice-slide1" data-target-id="slide1-content">Slide 1 (Principal)</button>
+                    <button class="slide-choice-button" id="choice-slide2" data-target-id="slide2-content">Slide 2 (Annonces)</button>
+                    <button class="slide-choice-button" id="choice-slide3" data-target-id="slide3-content">Slide 3 (Images/Offres)</button>
+                </div>
+            </div>
+
+            <div id="edition-forms-container" class="hidden">
+
+                <nav class="tabs">
+                    <button class="tab-button active" data-target="slide1-content">Slide 1</button>
+                    <button class="tab-button" data-target="slide2-content">Slide 2</button>
+                    <button class="tab-button" data-target="slide3-content">Slide 3</button>
+                </nav>
+
+                <div id="slide1-content" class="tab-content">
+                    <form id="form-slide1" class="edition-form">
+                        <h3>Widget 1 : Météo</h3>
+                        <div class="input-group">
+                            <label for="meteo-texte">Texte Météo (ex: ☀️ 22°C - Ensoleillé)</label>
+                            <input type="text" id="meteo-texte" name="meteo-texte" placeholder="☀️ 22°C">
+                        </div>
+                        <h3>Widget 2 : Événement de Dernière Minute</h3>
+                        <div class="input-group">
+                            <label for="evenement-texte">Texte de l'événement (Texte défilant)</label>
+                            <textarea id="evenement-texte" name="evenement-texte" rows="3" placeholder="Journée de l'innovation demain ! Rendez-vous en salle B101."></textarea>
+                        </div>
+                        <h3>Widget 3 : AP / Qui va où ? (PDF)</h3>
+                        <div class="input-group">
+                            <label for="ap-pdf-url">Chemin d'accès du PDF (ex: ../assets/pdfs/AP_schedule.pdf)</label>
+                            <input type="text" id="ap-pdf-url" name="ap-pdf-url" placeholder="../assets/pdfs/AP_schedule.pdf">
+                        </div>
+                        
+                        <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 1</button>
+                    </form>
+                </div>
+
+                <div id="slide2-content" class="tab-content hidden">
+                    <form id="form-slide2" class="edition-form">
+                        <h3>Widget 1 : Annonce du lycée</h3>
+                        <div class="input-group">
+                            <label for="annonces-texte">Texte des annonces (Utiliser la touche Entrée pour les sauts de ligne)</label>
+                            <textarea id="annonces-texte" name="annonces-texte" rows="6" placeholder="Portes ouvertes le 15 novembre.&#10;Inscription pour le voyage à Rome avant fin octobre."></textarea>
+                        </div>
+
+                        <h3>Widget 2 : Menu de la Cantine (PDF)</h3>
+                        <div class="input-group">
+                            <label for="menu-pdf-url">Chemin d'accès du PDF (ex: ../assets/pdfs/menu_cantine.pdf)</label>
+                            <input type="text" id="menu-pdf-url" name="menu-pdf-url" placeholder="../assets/pdfs/menu_cantine.pdf">
+                        </div>
+                        
+                        <h3>Widget 3 : Calendrier Scolaire (PDF)</h3>
+                        <div class="input-group">
+                            <label for="calendrier-pdf-url">Chemin d'accès du PDF (ex: ../assets/pdfs/calendrier_scolaire.pdf)</label>
+                            <input type="text" id="calendrier-pdf-url" name="calendrier-pdf-url" placeholder="../assets/pdfs/calendrier_scolaire.pdf">
+                        </div>
+
+                        <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 2</button>
+                    </form>
+                </div>
+
+                <div id="slide3-content" class="tab-content hidden">
+                    <form id="form-slide3" class="edition-form">
+                        <h3>Widget 1 : Photos de Voyages (Carrousel)</h3>
+                        <p class="warning-message">**IMPORTANT** : Vous devez d'abord ajouter les fichiers images dans votre dossier `assets/images/`.</p>
+                        <div class="input-group">
+                            <label for="photos-list">Liste des noms de fichiers images (séparés par des **virgules**)</label>
+                            <textarea id="photos-list" name="photos-list" rows="3" placeholder="voyage_rome.jpg, ski_trip.png, expo_art.jpg"></textarea>
+                        </div>
+
+                        <h3>Widget 2 : Offres d'Emploi / Stage</h3>
+                        <div class="input-group">
+                            <label for="offres-texte">Texte des offres (Utiliser la touche Entrée pour les sauts de ligne)</label>
+                            <textarea id="offres-texte" name="offres-texte" rows="6" placeholder="STAGE: Société Tech Innov recherche un développeur Junior..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 3</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

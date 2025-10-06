@@ -1,0 +1,43 @@
+/* --- Styles de Base de l'Écran Dynamique --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Empêche les barres de défilement */
+}
+#slide-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    /* Ajout d'une transition en fondu pour une meilleure expérience visuelle */
+    transition: opacity 0.5s ease-in-out; 
+}
+
+/* --- Indicateur de Progression Circulaire (Cercle) --- */
+
+#progress-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px; /* Taille du conteneur */
+    height: 70px;
+    z-index: 1000; /* Assure qu'il est au-dessus de l'iframe */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* L'indicateur est initialement invisible */
+    opacity: 0;
+    transition: opacity 0.5s;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond sombre semi-transparent */
+    border-radius: 50%;
+}
+
+#progress-ring {
+    width: 60px; /* Taille de l'anneau */
+    height: 60px;
+    border-radius: 50%;
+    /* Couleur initiale (bleu) et état à 360deg */
+    background: conic-gradient(#00ccff 360deg, transparent 360deg); 
+    transform: rotate(-90deg); /* Pour commencer en haut du cercle */
+}

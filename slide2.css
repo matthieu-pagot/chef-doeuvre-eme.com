@@ -1,0 +1,117 @@
+/* --- Styles de Base --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a; 
+    color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* --- Conteneur Principal (Grid) --- */
+.ecran-principal {
+    display: grid;
+    /* 4 colonnes : Annonces | Menu | Calendrier | Espace */
+    grid-template-columns: 2fr 1.5fr 1.5fr 0.2fr; 
+    /* 3 rangées : Espace Haut | Grand centre | Espace Bas */
+    grid-template-rows: 0.2fr 4fr 1fr 0.2fr;
+    width: 100vw;
+    height: 100vh;
+    gap: 20px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Styles des Widgets --- */
+.widget {
+    border: 3px solid #ffcc00; /* Contour jaune */
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+.widget .titre {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    flex-shrink: 0; 
+    color: #00ccff; /* Bleu pour les titres */
+    border-bottom: 3px solid #00ccff;
+    padding-bottom: 5px;
+}
+
+/* --- Positionnement des Éléments --- */
+
+.annonce-lycee {
+    grid-column: 1 / 2; 
+    grid-row: 2 / 4; 
+    text-align: left;
+}
+#annonces-contenu {
+    flex-grow: 1;
+    padding-top: 10px;
+    font-size: 1.5em;
+    white-space: pre-wrap; /* Pour respecter les sauts de ligne */
+    line-height: 1.5;
+    color: white;
+}
+
+.menu-cantine {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+.calendrier-scolaire {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+.info-semaine {
+    grid-column: 2 / 4;
+    grid-row: 3 / 4;
+    text-align: center;
+}
+.info-semaine .titre {
+    border: none;
+    font-size: 1.8em;
+}
+
+.heure-date {
+    grid-column: 4 / 5;
+    grid-row: 2 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+    background-color: #272727;
+}
+#heure-actuelle {
+    font-size: 3em;
+    margin: 0;
+    color: #4CAF50; /* Vert */
+}
+#date-actuelle {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* Style de l'affichage PDF */
+.pdf-container {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pdf-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+}

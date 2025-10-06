@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 1 - Écran Principal</title>
+    <link rel="stylesheet" href="slide1.css">
+</head>
+<body>
+    <div id="slide1" class="ecran-principal">
+        
+        <div class="widget meteo">
+            <p>☁️ Météo Actuelle</p>
+            <span id="meteo-texte">☀️ 22°C</span>
+        </div>
+
+        <div class="widget scores">
+            <p>⚽ Score des Matchs</p>
+            <span id="scores-texte">EME vs Lycée X : 3 - 1</span>
+        </div>
+        
+        <div class="widget transports">
+            <p>🚎 Horaires Transports</p>
+            <span id="transports-texte">15S: 17:15 | 40: 17:30</span>
+        </div>
+
+        <div class="widget ap-pdf">
+            <p>📝 AP / Qui va où ?</p>
+            <div id="ap-pdf-container" class="pdf-container">
+                <p>Zone d'affichage du PDF AP</p>
+            </div>
+        </div>
+
+        <div class="centre-heure-date">
+            <h1 id="heure-actuelle">12:34:56</h1>
+            <h2 id="date-actuelle">Lundi 06 Octobre</h2>
+        </div>
+
+        <div class="evenement-bas">
+            <p id="evenement-texte-output">Événement de dernière minute (Texte défilant)</p>
+        </div>
+        
+    </div>
+
+    <script>
+        function mettreAJourHeureEtDate() {
+            const maintenant = new Date();
+            const optionsHeure = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const optionsDate = { weekday: 'long', day: 'numeric', month: 'long' };
+
+            document.getElementById('heure-actuelle').textContent = maintenant.toLocaleTimeString('fr-FR', optionsHeure);
+            document.getElementById('date-actuelle').textContent = maintenant.toLocaleDateString('fr-FR', optionsDate);
+        }
+
+        mettreAJourHeureEtDate();
+        setInterval(mettreAJourHeureEtDate, 1000);
+    </script>
+    
+    <script>
+        const DATA_KEY_PREFIX = 'slideData-';
+
+        function chargerContenuDynamique() {
+            const slideId = document.getElementById('slide1').id + '-content';
+            const dataKey = DATA_KEY_PREFIX + slideId;
+            const data = JSON.parse(localStorage.getItem(dataKey));
+
+            if (!data) return;
+
+            // Météo et autres textes (mis à jour dans l'admin précédent)
+            document.getElementById('meteo-texte').textContent = data['meteo-texte'] || 'N/A';
+            document.getElementById('evenement-texte-output').textContent = data['evenement-texte'] || 'Événement de dernière minute...';
+            // Le champ scores-texte et transports-texte n'existe pas dans le formulaire actuel, on garde les valeurs par défaut ou on les ajoute.
+            
+            // PDF (AP/Qui va où)
+            const apPdfContainer = document.getElementById('ap-pdf-container');
+            if (apPdfContainer) {
+                apPdfContainer.innerHTML = data['ap-pdf-url'] 
+                    ? `<iframe src="${data['ap-pdf-url']}" type="application/pdf"></iframe>`
+                    : '<p>Veuillez télécharger le PDF AP/Qui va où via l\'interface.</p>';
+            }
+        }
+
+        chargerContenuDynamique();
+    </script>
+</body>
+</html>
