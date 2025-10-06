@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 1 - Écran Principal</title>
+    <link rel="stylesheet" href="slide1.css">
+</head>
+<body>
+    <div id="slide1" class="ecran-principal">
+        
+        <div class="widget meteo">
+            <p>Météo</p>
+            <span id="meteo-texte">☀️ 22°C</span>
+        </div>
+
+        <div class="widget scores">
+            <p>Sport</p>
+            <p>Score des matchs (dynamique)</p>
+        </div>
+
+        <div class="widget evenement-bas">
+            <p>Événement de dernière minute</p>
+            <p id="evenement-texte-output">Journée de l'innovation demain !</p>
+        </div>
+
+        <div class="centre-heure-date">
+            <h1 id="heure-actuelle">12:34:56</h1>
+            <h2 id="date-actuelle">Lundi 06 Octobre</h2>
+        </div>
+
+        <div class="widget ap-pdf">
+            <p>AP / Qui va où ?</p>
+            <div id="ap-pdf-container" class="pdf-container">
+                <p>Zone d'affichage du PDF AP</p>
+            </div>
+        </div>
+
+        <div class="widget transports">
+            <p>Horaires des Transports</p>
+            <p>(Bus, Train)</p>
+        </div>
+        
+        <div class="signature">
+            <p>Chef d'Oeuvre réaliser par NOM, PRENOMS</p>
+        </div>
+        
+    </div>
+    
+    <script>
+        function mettreAJourHeureEtDate() {
+            const maintenant = new Date();
+            const optionsHeure = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const optionsDate = { weekday: 'long', day: 'numeric', month: 'long' };
+            
+            document.getElementById('heure-actuelle').textContent = maintenant.toLocaleTimeString('fr-FR', optionsHeure);
+            document.getElementById('date-actuelle').textContent = maintenant.toLocaleDateString('fr-FR', optionsDate);
+        }
+
+        mettreAJourHeureEtDate();
+        setInterval(mettreAJourHeureEtDate, 1000);
+    </script>
+    
+    <script>
+        const DATA_KEY_PREFIX = 'slideData-';
+
+        function chargerContenuDynamique() {
+            const slideId = document.getElementById('slide1').id + '-content';
+            const dataKey = DATA_KEY_PREFIX + slideId;
+            const data = JSON.parse(localStorage.getItem(dataKey));
+
+            if (!data) return;
+
+            // Météo
+            document.getElementById('meteo-texte').textContent = data['meteo-texte'] || 'N/A';
+            // Événement (Texte défilant)
+            document.getElementById('evenement-texte-output').textContent = data['evenement-texte'] || 'Événement de dernière minute...';
+            // PDF (AP/Qui va où)
+            const apPdfContainer = document.getElementById('ap-pdf-container');
+            if (apPdfContainer) {
+                apPdfContainer.innerHTML = data['ap-pdf-url'] 
+                    ? `<iframe src="${data['ap-pdf-url']}" type="application/pdf"></iframe>`
+                    : '<p>Veuillez télécharger le PDF AP/Qui va où via l\'interface.</p>';
+            }
+        }
+        
+        chargerContenuDynamique(); 
+        // Ajoutez un intervalle si vous voulez que les données se rafraîchissent en direct (non requis pour une rotation simple)
+    </script>
+</body>
+</html>

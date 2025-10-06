@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Écran Dynamique</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div id="login-page" class="page active">
+        <div class="login-box">
+            <h2>Connexion Administrateur</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Nom d'utilisateur :</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" id="login-button">Se connecter</button>
+                <p id="login-message" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-interface" class="page hidden">
+        
+        <header>
+            <h1>Tableau de Bord - Gestion des Slides</h1>
+        </header>
+
+        <nav class="tabs hidden"> 
+            <button class="tab-button" data-target="slide1-content">Slide 1</button>
+            <button class="tab-button" data-target="slide2-content">Slide 2</button>
+            <button class="tab-button" data-target="slide3-content">Slide 3</button>
+            <button class="logout-button" id="logout-button">Déconnexion</button>
+        </nav>
+
+        <main class="content-area">
+            <div id="slide1-content" class="tab-content hidden">
+                <form id="form-slide1" class="edition-form">
+                    <h3>Widget 1 : Météo et Événements</h3>
+                    <div class="input-group">
+                        <label for="meteo-texte">Météo (Texte court, ex: ☁️ 18°C)</label>
+                        <input type="text" id="meteo-texte" name="meteo-texte" maxlength="50">
+                    </div>
+                    <div class="input-group">
+                        <label for="evenement-texte">Événement de Dernière Minute (Texte défilant)</label>
+                        <textarea id="evenement-texte" name="evenement-texte" rows="3"></textarea>
+                    </div>
+
+                    <h3>Widget 2 : AP / Infos PDF</h3>
+                    <div class="input-group">
+                        <label for="ap-pdf-url">Lien du PDF AP/Qui va où (URL/Chemin Fichier Local)</label>
+                        <input type="text" id="ap-pdf-url" name="ap-pdf-url" placeholder="../assets/pdfs/AP_schedule.pdf">
+                    </div>
+                    
+                    <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 1</button>
+                </form>
+            </div>
+
+            <div id="slide2-content" class="tab-content hidden">
+                <form id="form-slide2" class="edition-form">
+                    <h3>Widget 1 : Annonces du Lycée</h3>
+                    <div class="input-group">
+                        <label for="annonces-texte">Annonces (Portes ouvertes, voyages, etc.)</label>
+                        <textarea id="annonces-texte" name="annonces-texte" rows="8"></textarea>
+                    </div>
+
+                    <h3>Widget 2 : PDF de la Cantine et Calendrier</h3>
+                    <div class="input-group">
+                        <label for="menu-pdf-url">Lien du PDF du Menu de la Cantine (URL/Chemin)</label>
+                        <input type="text" id="menu-pdf-url" name="menu-pdf-url" placeholder="../assets/pdfs/menu_cantine.pdf">
+                    </div>
+                    <div class="input-group">
+                        <label for="calendrier-pdf-url">Lien du PDF du Calendrier Scolaire (URL/Chemin)</label>
+                        <input type="text" id="calendrier-pdf-url" name="calendrier-pdf-url" placeholder="../assets/pdfs/calendrier_scolaire.pdf">
+                    </div>
+                    
+                    <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 2</button>
+                </form>
+            </div>
+
+            <div id="slide3-content" class="tab-content hidden">
+                <form id="form-slide3" class="edition-form">
+                    <h3>Widget 1 : Photos de Voyages (Carrousel)</h3>
+                    <p class="warning-message">Note : Pour les photos, vous devrez ajouter les fichiers directement dans `assets/images/` et lister leurs noms ici (séparés par des virgules).</p>
+                    <div class="input-group">
+                        <label for="photos-list">Liste des noms de fichiers images (séparés par des virgules)</label>
+                        <textarea id="photos-list" name="photos-list" rows="3" placeholder="voyage_rome.jpg, ski_trip.png, expo_art.jpg"></textarea>
+                    </div>
+
+                    <h3>Widget 2 : Offres d'Emploi / Stage</h3>
+                    <div class="input-group">
+                        <label for="offres-texte">Texte des offres (Nouvelles annonces, dates limites, etc.)</label>
+                        <textarea id="offres-texte" name="offres-texte" rows="6"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="save-button">💾 Enregistrer les données de la Slide 3</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* --- Styles de Base (Thème Sombre Uniforme) --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #333; 
+    color: white;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* --- Conteneur Principal (Flexbox) --- */
+.ecran-principal {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- ZONE 1 : PHOTOS (Grande partie à gauche) --- */
+.zone-photos {
+    flex-basis: 70%; 
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a; 
+}
+
+.zone-photos .titre-principal {
+    font-size: 3em;
+    color: #ffcc00; /* Jaune vif pour le titre */
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#carrousel-photos {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.05); 
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 20px;
+    border: 3px dashed #00ccff; /* Rappel du cyan */
+}
+
+
+/* --- ZONE 2 : BARRE LATÉRALE (30% à droite) --- */
+.zone-laterale {
+    flex-basis: 30%; 
+    background-color: #444; 
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 0.5fr 1.5fr 2fr;
+    gap: 20px;
+}
+
+/* Styles communs aux widgets de la barre latérale */
+.widget {
+    background-color: rgba(0, 0, 0, 0.4); 
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    border: 3px solid #00ccff; /* Bordure Cyan */
+    display: flex;
+    flex-direction: column;
+}
+.widget .titre {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ffcc00; /* Titre en jaune vif */
+}
+
+/* Style de l'heure et de la date */
+.heure-date {
+    background-color: rgba(0, 204, 255, 0.1); /* Fond légèrement cyan */
+    color: #00ccff; /* Texte en Cyan */
+    padding: 10px;
+}
+.heure-date p {
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.heure-date h1 {
+    font-size: 2.2em;
+    margin: 5px 0 0;
+    line-height: 1;
+}
+.heure-date h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Style de la zone Talents (Surprise) */
+.talents {
+    background-color: #555;
+    border: 3px solid gold; /* Cadre doré */
+}
+.talents .titre {
+    color: gold;
+    font-size: 1.5em;
+}
+.talents .citation {
+    margin-top: auto; 
+    font-style: italic;
+    font-size: 1.1em;
+    color: #ccc;
+}

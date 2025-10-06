@@ -1,0 +1,108 @@
+/* --- Styles de Base (Thème Sombre Uniforme) --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #333; /* Fond sombre */
+    color: white; /* Texte blanc */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* --- Conteneur Principal (Grid) --- */
+.ecran-principal {
+    display: grid;
+    /* 5 colonnes: Annonce(2), Menu(1.5), Menu/Étude(1), Heure(0.5), Marge(0.2) */
+    grid-template-columns: 2fr 1.5fr 1fr 0.5fr 0.2fr; 
+    /* 4 lignes: Marge(0.2), Haut(1.5), Bas(2), Marge(0.2) */
+    grid-template-rows: 0.2fr 1.5fr 2fr 0.2fr;
+    width: 100vw;
+    height: 100vh;
+    gap: 20px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Styles des Widgets (Thème Vif) --- */
+.widget {
+    border: 3px solid #00ccff; /* Bordure Cyan */
+    background-color: rgba(0, 0, 0, 0.4); /* Fond semi-transparent */
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.widget .titre {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    flex-shrink: 0; 
+    color: #ffcc00; /* Titre du widget en Jaune vif */
+}
+.pdf-container {
+    flex-grow: 1;
+    width: 100%;
+}
+.pdf-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+/* --- Positionnement des Éléments --- */
+
+.annonce-lycee {
+    grid-column: 1 / 2; 
+    grid-row: 2 / 3;    
+    text-align: left;
+}
+#annonces-contenu {
+    flex-grow: 1;
+    padding-top: 5px;
+    font-size: 1.1em;
+}
+
+.menu-cantine {
+    grid-column: 2 / 4; 
+    grid-row: 2 / 3;
+}
+
+/* Heure et Date (Haut à droite) */
+.heure-date {
+    grid-column: 4 / 5; 
+    grid-row: 2 / 3;    
+    border: none; 
+    padding: 0;
+    align-items: flex-end; 
+    justify-content: flex-start;
+    color: #00ccff; /* Couleur principale en Cyan */
+    background-color: transparent; 
+}
+.heure-date h3 {
+    font-size: 3em;
+    margin: 0;
+}
+.heure-date p {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.calendrier-scolaire {
+    grid-column: 1 / 4; 
+    grid-row: 3 / 4;    
+}
+
+.etude-profs {
+    grid-column: 4 / 5; 
+    grid-row: 3 / 4;
+    justify-content: flex-start;
+}
+#etude-contenu {
+    padding-top: 10px;
+    font-size: 1.1em;
+}

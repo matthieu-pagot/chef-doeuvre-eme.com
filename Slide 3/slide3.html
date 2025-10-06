@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 3 - Inspiration et Opportunités</title>
+    <link rel="stylesheet" href="slide3.css"> 
+</head>
+<body>
+    <div id="slide3" class="ecran-principal">
+        
+        <div class="zone-photos">
+            <h2 class="titre-principal">📸 Moments de nos Voyages</h2>
+            <div id="carrousel-photos">
+                <p>Les photos des voyages s'afficheront ici.</p>
+            </div>
+        </div>
+
+        <div class="zone-laterale">
+            
+            <div class="widget heure-date">
+                <p>Heure + Date</p>
+                <h1 id="heure-actuelle">12:34:56</h1>
+                <h2 id="date-actuelle">Lun. 6 Oct.</h2>
+            </div>
+            
+            <div class="widget offres-emploi">
+                <p class="titre">📢 Offres d'Emploi / Stage</p>
+                <div id="offres-contenu"> 
+                    <p>Liste des dernières opportunités de stage et d'emploi.</p>
+                </div>
+            </div>
+            
+            <div class="widget talents">
+                <p class="titre">⭐ Talents de l'ÉME</p>
+                <div id="talents-contenu">
+                    <p>Mise en lumière d'une réussite, d'un projet étudiant ou d'un talent particulier.</p>
+                    <p class="citation">"La seule limite est votre imagination."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function mettreAJourHeureEtDate() {
+            const maintenant = new Date();
+            const optionsHeure = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const optionsDate = { weekday: 'short', month: 'short', day: 'numeric' };
+
+            document.getElementById('heure-actuelle').textContent = maintenant.toLocaleTimeString('fr-FR', optionsHeure);
+            document.getElementById('date-actuelle').textContent = maintenant.toLocaleDateString('fr-FR', optionsDate);
+        }
+
+        mettreAJourHeureEtDate();
+        setInterval(mettreAJourHeureEtDate, 1000);
+    </script>
+    
+    <script>
+        const DATA_KEY_PREFIX = 'slideData-';
+
+        function chargerContenuDynamique() {
+            const slideId = document.getElementById('slide3').id + '-content';
+            const dataKey = DATA_KEY_PREFIX + slideId;
+            const data = JSON.parse(localStorage.getItem(dataKey));
+
+            if (!data) return;
+
+            // Offres d'emploi
+            document.getElementById('offres-contenu').innerHTML = (data['offres-texte'] || 'Pas d\'offres d\'emploi/stage actuellement.').replace(/\n/g, '<br>');
+            
+            // Photos (Affiche la liste des images pour le carrousel)
+            document.getElementById('carrousel-photos').innerHTML = data['photos-list']
+                ? `<p>Liste des images pour le carrousel: ${data['photos-list']}</p><p>Un script de carrousel (non inclus ici) est nécessaire pour l'affichage dynamique.</p>`
+                : '<p>Veuillez lister les photos de voyage dans l\'interface.</p>';
+            
+            // Note: La zone Talents est laissée statique pour un effet de surprise ou une mise à jour manuelle simple.
+        }
+        
+        chargerContenuDynamique(); 
+    </script>
+</body>
+</html>
